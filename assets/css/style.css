@@ -8,4 +8,10 @@ body {
 
 .card-header {
     background-color: lightsalmon;
+    font-weight: bolder;
+}
+
+label {
+    
+
 }
