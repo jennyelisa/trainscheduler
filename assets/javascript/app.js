@@ -55,7 +55,7 @@
         var tName = childSnapshot.val().name;
         var destin = childSnapshot.val().destination;
         var freqMin = childSnapshot.val().frequency;
-        // var firstTrainTime = childSnapshot.val().firstTrain;
+        var firstTrainTime = childSnapshot.val().firstTrain;
         
 
         // console.log(name);
@@ -67,18 +67,25 @@
 //MATH
 
     // time into military time
-        var today = new Date();
-        var currentTime = today.getHours() + ":" + today.getMinutes() + "";
-        console.log(currentTime);
+        // var today = new Date();
+        // var currentTime = today.getHours() + ":" + today.getMinutes() + "";
+        // console.log(currentTime);
 
-        var nextArrival = parseInt(currentTime)+parseInt(freqMin);
-        console.log(nextArrival);
-        var nextArrivalTime = moment().diff(nextArrival, "hours"); 
-        moment().format("HH:mm");
-        console.log(nextArrivalTime); 
+        // var nextArrival = parseInt(currentTime)+parseInt(freqMin);
+        // console.log(nextArrival);
 
-        var minutesAway = moment().diff(nextArrivalTime, "hours");
-        console.log(minutesAway);
+        firstTimeCal = moment(firstTrainTime, "hh:mm")
+        console.log(firstTimeCal)
+        diffTime = moment().diff(moment(firstTimeCal), "minutes");
+        console.log(diffTime)
+        tRemainder = diffTime % freqMin;
+        console.log(tRemainder)
+        minutesAway = freqMin - tRemainder;
+        console.log(minutesAway)
+        nextTrain = moment().add(minutesAway, "minutes");
+        console.log(nextTrain)
+        nextTrainFormatted = moment(nextTrain).format("hh:mm");
+        console.log(nextTrainFormatted)
 
 
 
@@ -87,8 +94,9 @@
         $("<td>").text(tName),
         $("<td>").text(destin),
         $("<td>").text(freqMin),
-        $("<td>").text(nextArrivalTime),
+       $("<td>").text(nextTrainFormatted),
         $("<td>").text(minutesAway)
+        
         
     );
 
